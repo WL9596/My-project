@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class classic : MonoBehaviour
 {
+    void Start()
+    {
+        this.gameObject.transform.localScale = new Vector3(0.3f, -1, 1);
+    }
     void Update()
     {
         // 1. 獲取滑鼠的世界位置
@@ -20,11 +24,14 @@ public class classic : MonoBehaviour
         // 5. 處理反轉 (若滑鼠在左邊，武器反轉以避免倒立)
         if (angle > 90 || angle < -90)
         {
-            transform.localScale = new Vector3(1, -1, 1);
+            transform.localRotation = Quaternion.Euler(0, 0, angle + 90);
+            this.gameObject.transform.localScale = new Vector3(0.2f, -0.3f, 1);
+
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localRotation = Quaternion.Euler(0, 0, angle - 90);
+            this.gameObject.transform.localScale = new Vector3(0.2f, 0.3f, 1);
         }
     }
 }

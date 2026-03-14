@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class knife : MonoBehaviour
 {
+    void Start()
+    {
+        this.gameObject.transform.localScale = new Vector3(0.3f, -1, 1);
+    }
+
     void Update()
     {
+        
         // 1. 獲取滑鼠的世界位置
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0f; // 2D 遊戲中，確保 Z 軸為 0 [6, 8]
@@ -15,16 +21,20 @@ public class knife : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // 4. 旋轉父物件 (WeaponPivot)
-        transform.localRotation = Quaternion.Euler(0, 0, angle);
+
+       
 
         // 5. 處理反轉 (若滑鼠在左邊，武器反轉以避免倒立)
         if (angle > 90 || angle < -90)
         {
-            transform.localScale = new Vector3(1, -1, 1);
+            transform.localRotation = Quaternion.Euler(0, 0, angle + 90);
+            this.gameObject.transform.localScale = new Vector3(0.1f, -1.5f, 1);
+
         }
         else
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localRotation = Quaternion.Euler(0, 0, angle-90);
+            this.gameObject.transform.localScale = new Vector3(0.1f, 1.5f, 1);
         }
     }
 }
