@@ -1,9 +1,20 @@
 using UnityEngine;
 
-public class Frag : MonoBehaviour
+public class Frag : item
 {
     private bool inhand;
     public float speed = 1;
+    public override void UseItem(float angle)
+    {
+        bool throwing = false;
+        bool flying = false;
+        if (flying)
+        {
+            this.gameObject.transform.position += (new Vector3((float)(speed * Mathf.Cos(angle)), (float)(speed * Mathf.Cos(angle)), 1));
+        }
+    }
+
+
     void Start()
     {
         inhand = true;
@@ -33,7 +44,7 @@ public class Frag : MonoBehaviour
         // 4. 旋轉父物件 (WeaponPivot)
 
 
-        if(inhand)
+        if (inhand)
         {
             // 5. 處理反轉 (若滑鼠在左邊，武器反轉以避免倒立)
             if (angle > 90 || angle < -90)

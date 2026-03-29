@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class classic : MonoBehaviour
+public class classic : item
 {
     void Start()
     {

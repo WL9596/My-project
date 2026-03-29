@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Rifle : MonoBehaviour
+public class Rifle : item
 {
     void Start()
     {
