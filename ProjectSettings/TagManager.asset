@@ -13,10 +13,10 @@ TagManager:
   - Water
   - UI
   - 
+  - Build
   - 
   - 
-  - 
-  - 
+  - Charater
   - 
   - 
   - 
@@ -41,6 +41,21 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3567479209
+    locked: 0
+  - name: Building_Behind
+    uniqueID: 1401810751
+    locked: 0
+  - name: Charater
+    uniqueID: 4089782219
+    locked: 0
+  - name: Building_InFront
+    uniqueID: 1197356585
+    locked: 0
+  - name: UI
+    uniqueID: 1775117671
     locked: 0
   m_RenderingLayers:
   - Default
