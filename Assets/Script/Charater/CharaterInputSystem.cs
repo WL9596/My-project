@@ -13,11 +13,19 @@ public class CharaterInputSystem : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            charater.UseItem();
+            charater.ClickUseItem();
         }
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(0))
         {
-            charater.UseItem2();
+            charater.ContinueUseItem();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            charater.ClickUseItem2();
+        }
+        if (Input.GetMouseButton(1))
+        {
+            charater.ContinueUseItem2();
         }
 
     }

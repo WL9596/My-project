@@ -16,8 +16,16 @@ public class CharaterItemContrioller : MonoBehaviour, CharaterComponent
     {
         currentHoldingItem.UseItem();
     }
+    public void ContinueUseItem()
+    {
+        currentHoldingItem.ContinueUseItem();
+    }
     public void UseItem2()
     {
         currentHoldingItem.UseItem2();
+    }
+    public void ContinueUseItem2()
+    {
+        currentHoldingItem.ContinueUseItem2();
     }
 }

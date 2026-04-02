@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharaterState : MonoBehaviour, CharaterComponent
+public class CharaterProperty : MonoBehaviour, CharaterComponent
 {
     [SerializeField] Transform charaterTransform;
+    public Transform CharaterTransform => charaterTransform;
     [Header("State")]
     [SerializeField] int health;
     public int Health => health;
@@ -12,35 +13,10 @@ public class CharaterState : MonoBehaviour, CharaterComponent
     public float BaseSpeed => speed;
     public float CurrentSpeed => buffList.GetSpeed(speed);
     BuffList buffList = new BuffList();
+    public BuffList PropertyBuffList => buffList;
 
 
-    public void Move(Vector2 controll)
-    {
-        if (controll.x == 0 && controll.y == 0) { return; }
-        Vector2 movement = controll.normalized * (buffList.GetSpeed(speed) * Time.deltaTime);
-        TranslatePosition(movement);
-    }
-    public void TranslatePosition(Vector2 vector2)
-    {
-        Vector2 direction = vector2.normalized;
-        RaycastHit2D hit = Physics2D.Raycast(charaterTransform.position, direction, vector2.magnitude+0.5f, LayerMask.GetMask("Build"));
-        Debug.DrawRay(charaterTransform.position, -vector2, Color.red, 1);//軌跡
-        Debug.Log($"pos:{charaterTransform.position} | vec:{vector2}");
-
-        //未來碰撞架構搭建完後再更改判定
-        if (hit.collider != null)
-        {
-            charaterTransform.position = hit.point - direction * 0.5f;
-        }
-        else
-        {
-            charaterTransform.position = (Vector2)charaterTransform.position + vector2;
-        }
-    }
-    public void Facing(float rotation)
-    {
-        charaterTransform.transform.rotation = Quaternion.Euler(new Vector3(0,0,rotation));
-    }
+    
 
     public void StateUpdate()
     {
