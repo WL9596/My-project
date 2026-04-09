@@ -7,6 +7,7 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     [SerializeField] Transform charaterTransform;
     public Transform CharaterTransform => charaterTransform;
 
+
     [Header("Property")]
     [SerializeField] int health;
     public int Health => health;
@@ -17,10 +18,10 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
 
     BuffList allBuffList = new BuffList();
 
-    [SerializeField] float speed = 0.01f;
-    public float BaseSpeed => speed;
+    [SerializeField] float originalSpeed = 0.01f;
+    public float BaseSpeed => originalSpeed;
     BuffList speedBuffList = new BuffList(PropertyEnum.speed);
-    public float CurrentSpeed => speedBuffList.GetSpeed(speed);
+    public float CurrentSpeed => speedBuffList.GetSpeed(originalSpeed);
 
     [SerializeField] float damageReductionRate = 1;
     public float DamageReductionRate => damageReductionRate;

@@ -16,6 +16,13 @@ public class AttackManager : MonoBehaviour
     /// <param name="attackInfo"></param>
     public void DamageRegister(AttackInfo attackInfo)
     {
+        if(attackInfo.GetType().IsSubclassOf(typeof(RaycastAttackInfo)))
+        {
+            DamageRegister((RaycastAttackInfo)attackInfo);
+        }
+    }
+    public void DamageRegister(RaycastAttackInfo attackInfo)
+    {
         
     }
 }

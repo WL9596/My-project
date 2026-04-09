@@ -50,4 +50,5 @@ public class BuffList
         }
         return damageReductionRate;
     }
+
 }
