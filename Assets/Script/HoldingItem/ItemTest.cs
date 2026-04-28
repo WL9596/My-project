@@ -19,4 +19,7 @@ public class ItemTest : Item
     {
         Debug.Log("ContinueUseItem2");
     }
+    public override void StateUpdate()
+    {
+    }
 }

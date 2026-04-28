@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,18 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected CharaterHitBox hitbox;
     [SerializeField] protected CharaterItemContrioller itemController;
     [SerializeField] protected CharaterProperty property;
+
+    [Header("Skill State")]
+    [SerializeField] protected SkillEnum skillEnum = SkillEnum.non;
+    [SerializeField] protected float skill1Cooldown;
+    [SerializeField] protected float skill1CooldownTimer;
+    [SerializeField] protected float skill2Cooldown;
+    [SerializeField] protected float skill2CooldownTimer;
+    [SerializeField] protected float skill3Cooldown;
+    [SerializeField] protected float skill3CooldownTimer;
+    [SerializeField] protected float ultimateSkillCooldown;
+    [SerializeField] protected float ultimateSkillCooldownTimer;
+    
 
     public virtual void Move(Vector2 controll)
     {
@@ -55,11 +68,19 @@ public abstract class Charater : MonoBehaviour
     public abstract void UseSkill2();
     public abstract void UseSkill3();
     public abstract void UseUltimateSkill();
+    public abstract void Skill1StateUpdate();
+    public abstract void Skill2StateUpdate();
+    public abstract void Skill3StateUpdate();
+    public abstract void UltimateSkillStateUpdate();
     public void ReceiveDamageInfo(DamageInfo damageInfo)
     {
         //BUFF處裡的位置
         property.ReceiveDamage(damageInfo.damage);
     }
+    public virtual bool IsAbleUseSkill1() { return skill1CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill1); }
+    public virtual bool IsAbleUseSkill2() { return skill2CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill2); }
+    public virtual bool IsAbleUseSkill3() { return skill3CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill3); }
+    public virtual bool IsAbleUseUltimateSkill() { return ultimateSkillCooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.ultimateSkill); }
     
 
     /// <summary>
@@ -71,11 +92,20 @@ public abstract class Charater : MonoBehaviour
     {
         StateUpdate();
     }
-    public void StateUpdate()
+    public virtual void StateUpdate()
     {
         animationController.StateUpdate();
         hitbox.StateUpdate();
         itemController.StateUpdate();
         property.StateUpdate();
+
+        if (skill1CooldownTimer > 0) { skill1CooldownTimer -= Time.deltaTime; }
+        if (skill2CooldownTimer > 0) { skill2CooldownTimer -= Time.deltaTime; }
+        if (skill3CooldownTimer > 0) { skill3CooldownTimer -= Time.deltaTime; }
+        if (ultimateSkillCooldownTimer > 0) { ultimateSkillCooldownTimer -= Time.deltaTime; }
+        if (skillEnum.HasFlag(SkillEnum.skill1)) { Skill1StateUpdate(); }
+        if (skillEnum.HasFlag(SkillEnum.skill2)) { Skill2StateUpdate(); }
+        if (skillEnum.HasFlag(SkillEnum.skill3)) { Skill3StateUpdate(); }
+        if (skillEnum.HasFlag(SkillEnum.ultimateSkill)) { UltimateSkillStateUpdate(); }
     }
 }

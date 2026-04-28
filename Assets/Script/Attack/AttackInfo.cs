@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class AttackInfo
 {
-    public float timestamp;
     public DamageInfo damageInfo;
 }
 public class RaycastAttackInfo : AttackInfo

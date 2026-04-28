@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c7cb1f27e14084da2479c0931444d1, type: 3}
+  m_Name: prefabCollection
+  m_EditorClassIdentifier: Assembly-CSharp::PrefabCollection
+  rrrose: {fileID: 4670093217092885865, guid: 889e380a26ce4a2469e0162f9a937814, type: 3}
+  rrroseRifleBullet: {fileID: 8083962029604432650, guid: e7f4db53e86df7e47b8ca0ab565fa429, type: 3}
