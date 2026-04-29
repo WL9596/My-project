@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RrroseRifle : Item
 {
+    [SerializeField] GameObject rrroseRifleBulletModel;
     [SerializeField] float rifleInterval = 0.2f;
     [SerializeField] float rifleTimer = 0;
 
@@ -22,10 +23,11 @@ public class RrroseRifle : Item
     }
     void Shoot()
     {
-        RrroseRifleBullet rifleBullet = Instantiate(PrefabCollection.Instance.rrroseRifleBullet).GetComponent<RrroseRifleBullet>();
+        RrroseRifleBullet rifleBullet = Instantiate(rrroseRifleBulletModel).GetComponent<RrroseRifleBullet>();
         rifleBullet.transform.rotation = transform.rotation;
         rifleBullet.transform.position = transform.position;
         rifleBullet.attacker = ownerCharater.gameObject;
+        rifleBullet.attackCharater = ownerCharater;
     }
 
     

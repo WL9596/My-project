@@ -5,9 +5,9 @@ using UnityEngine;
 [Serializable]
 public abstract class BuffState
 {
-    HashSet<PropertyEnum> propertyEnums;
+    protected HashSet<PropertyEnum> propertyEnums;
     public HashSet<PropertyEnum> PropertyEnums => propertyEnums;
-    int timer;//if timer == -1 , which mean this buff wont disappear
+    protected int timer;//if timer == -1 , which mean this buff wont disappear
     
     public virtual void StateUpdate()
     {
@@ -20,9 +20,13 @@ public abstract class BuffState
     {
         return timer == 0;
     }
+    public void RemoveState()
+    {
+        timer =0;
+    }
     public virtual void ExecuteOnBuffAdded(){}
 
     public virtual float GetSpeed(float speed) { return speed; }
     public virtual float GetDamageReductionRate(float damageReductionRate) { return damageReductionRate; }
-
+    public virtual bool GetIsEnableRotate(bool isEnableRotate){return isEnableRotate;}
 }

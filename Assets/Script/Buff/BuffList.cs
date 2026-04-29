@@ -50,5 +50,12 @@ public class BuffList
         }
         return damageReductionRate;
     }
-
+    public bool GetIsEnableRotate(bool isEnableRotate)
+    {
+        foreach (BuffState buffState in buffList)
+        {
+            isEnableRotate = buffState.GetIsEnableRotate(isEnableRotate) ? isEnableRotate : false;
+        }
+        return isEnableRotate;
+    }
 }

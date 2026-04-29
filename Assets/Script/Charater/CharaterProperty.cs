@@ -11,6 +11,9 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     [Header("Property")]
     [SerializeField] int health;
     public int Health => health;
+    [SerializeField] int maxHealth;
+    [SerializeField] int blueHealth;
+    public int BlueHealth => blueHealth;
     [SerializeField] float maxRegenerationReadyTime;
     [SerializeField] float regenerationReadyTimer;
 
@@ -20,13 +23,14 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
 
     [SerializeField] float originalSpeed = 0.01f;
     public float BaseSpeed => originalSpeed;
-    BuffList speedBuffList = new BuffList(PropertyEnum.speed);
-    public float CurrentSpeed => speedBuffList.GetSpeed(originalSpeed);
+    public float CurrentSpeed => allBuffList.GetSpeed(originalSpeed);
+
+    [SerializeField] bool originalIsEnableRotation = true;
+    public bool CurrentIsEnableRotation => allBuffList.GetIsEnableRotate(originalIsEnableRotation);
 
     [SerializeField] float damageReductionRate = 1;
     public float DamageReductionRate => damageReductionRate;
-    BuffList damageReductionRateList = new BuffList(PropertyEnum.damageReductionRate);
-    public float CurrentDamageReductionRate => damageReductionRateList.GetDamageReductionRate(damageReductionRate);
+    public float CurrentDamageReductionRate => allBuffList.GetDamageReductionRate(damageReductionRate);
     /// <summary>
     /// TODO
     /// 剩餘的玩家角色數值需要再寫
@@ -36,7 +40,14 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     /// </summary>
 
     
-
+    public void GetBlueHealth(int value)
+    {
+        blueHealth += value;
+    }
+    public void ClearBlueHealth()
+    {
+        blueHealth = 0;
+    }
     public void ReceiveDamage(int damage)
     {
         damage = (int)Math.Round(CurrentDamageReductionRate*damage);
@@ -44,7 +55,22 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     }
     void DirectlyReceiveDamage(int damage)
     {
+        if (blueHealth > 0)
+        {
+            blueHealth-=damage;
+            blueHealth = Math.Max(blueHealth,0);
+            return;
+        }
         health -= damage;
+    }
+    public void ReceiveHeal(int heal)
+    {
+        DirectlyReceiveHeal(heal);
+    }
+    void DirectlyReceiveHeal(int heal)
+    {
+        health+=heal;
+        health = Math.Min(health,maxHealth);
     }
 
     public void StateUpdate()
@@ -55,28 +81,12 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     {
         allBuffList.StateUpdate();
         allBuffList.DeleteTimeoutBuff();
-        speedBuffList.DeleteTimeoutBuff();
-        damageReductionRateList.DeleteTimeoutBuff();
+
     }
-    void AddBuffState(BuffState buffState)
+    public void AddBuffState(BuffState buffState)
     {
         buffState.ExecuteOnBuffAdded();
-        HashSet<PropertyEnum> propertyEnums = buffState.PropertyEnums;
-        foreach(PropertyEnum property in propertyEnums)
-        {
-            switch (property)
-            {
-                case PropertyEnum.speed:
-                    speedBuffList.AddBuffState(buffState);
-                    break;
-                case PropertyEnum.damageReductionRate:
-                    damageReductionRateList.AddBuffState(buffState);
-                    break;
-                default:
-                    Debug.LogError($"Unfound property buff list:{property}");
-                    break;
-            }
-        }
+        allBuffList.AddBuffState(buffState);
     }
     void Update()
     {

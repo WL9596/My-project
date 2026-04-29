@@ -319,6 +319,7 @@ MonoBehaviour:
   maxRegenerationReadyTime: 0
   regenerationReadyTimer: 0
   originalSpeed: 5
+  originalIsEnableRotation: 1
   damageReductionRate: 1
 --- !u!114 &8774595103788002297
 MonoBehaviour:
@@ -412,6 +413,7 @@ MonoBehaviour:
   hitbox: {fileID: 8774595103788002297}
   itemController: {fileID: 7849559922633916812}
   property: {fileID: 3458920082253029539}
+  teamTag: 0
   skillEnum: 0
   skill1Cooldown: 3
   skill1CooldownTimer: 0
@@ -422,9 +424,13 @@ MonoBehaviour:
   ultimateSkillCooldown: 3
   ultimateSkillCooldownTimer: 0
   hookAnimator: {fileID: 7574788965177129358}
-  hookCollider: {fileID: 2113699473266286840}
+  hookCollider: {fileID: 801786160233980715}
   hookState: 0
   hookedObj: {fileID: 0}
+  healthCircleModel: {fileID: 7330518574551305056, guid: ec10a8291d5830544a77cb9f5cc1786b, type: 3}
+  healthCircle: {fileID: 0}
+  healthCircleTimer: 0
+  healCircleContinueTime: 5
 --- !u!1 &5137805105919379392
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RrroseRifle
   ownerCharater: {fileID: -5663273325218670795}
   isHolding: 1
+  rrroseRifleBulletModel: {fileID: 8083962029604432650, guid: e7f4db53e86df7e47b8ca0ab565fa429, type: 3}
   rifleInterval: 0.2
   rifleTimer: 0
 --- !u!1 &6213280945850691338

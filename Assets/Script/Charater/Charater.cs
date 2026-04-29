@@ -10,6 +10,10 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected CharaterItemContrioller itemController;
     [SerializeField] protected CharaterProperty property;
 
+    [Header("Team tag")]
+    [SerializeField] protected int teamTag = 0;
+    public int TeamTag => teamTag;
+
     [Header("Skill State")]
     [SerializeField] protected SkillEnum skillEnum = SkillEnum.non;
     [SerializeField] protected float skill1Cooldown;
@@ -21,7 +25,10 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected float ultimateSkillCooldown;
     [SerializeField] protected float ultimateSkillCooldownTimer;
     
-
+    public void AddBuffState(BuffState buffState)
+    {
+        property.AddBuffState(buffState);
+    }
     public virtual void Move(Vector2 controll)
     {
         if (controll.x == 0 && controll.y == 0) { return; }
@@ -46,6 +53,7 @@ public abstract class Charater : MonoBehaviour
     }
     public virtual void Facing(float rotation)
     {
+        if(!property.CurrentIsEnableRotation){return;}
         property.CharaterTransform.rotation = Quaternion.Euler(new Vector3(0,0,rotation));
     }
     public virtual void ClickUseItem()
@@ -68,20 +76,32 @@ public abstract class Charater : MonoBehaviour
     public abstract void UseSkill2();
     public abstract void UseSkill3();
     public abstract void UseUltimateSkill();
-    public abstract void Skill1StateUpdate();
-    public abstract void Skill2StateUpdate();
-    public abstract void Skill3StateUpdate();
-    public abstract void UltimateSkillStateUpdate();
+    protected abstract void Skill1StateUpdate();
+    protected abstract void Skill2StateUpdate();
+    protected abstract void Skill3StateUpdate();
+    protected abstract void UltimateSkillStateUpdate();
     public void ReceiveDamageInfo(DamageInfo damageInfo)
     {
         //BUFF處裡的位置
-        property.ReceiveDamage(damageInfo.damage);
+        if(damageInfo.damage>=0)
+        {
+            property.ReceiveDamage(damageInfo.damage);
+        }
+        else
+        {
+            property.ReceiveHeal(-damageInfo.damage);
+        }
     }
-    public virtual bool IsAbleUseSkill1() { return skill1CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill1); }
-    public virtual bool IsAbleUseSkill2() { return skill2CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill2); }
-    public virtual bool IsAbleUseSkill3() { return skill3CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill3); }
-    public virtual bool IsAbleUseUltimateSkill() { return ultimateSkillCooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.ultimateSkill); }
-    
+    protected virtual bool IsAbleUseSkill1() { return skill1CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill1); }
+    protected virtual bool IsAbleUseSkill2() { return skill2CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill2); }
+    protected virtual bool IsAbleUseSkill3() { return skill3CooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.skill3); }
+    protected virtual bool IsAbleUseUltimateSkill() { return ultimateSkillCooldownTimer <= 0 && !skillEnum.HasFlag(SkillEnum.ultimateSkill); }
+    protected virtual void BreakSkill1(){}
+    protected virtual void BreakSkill2(){}
+    protected virtual void BreakSkill3(){}
+    protected virtual void BreakUltimateSkill(){}
+
+    public virtual void OnBulletHit(Vector3 hitPosition){}
 
     /// <summary>
     /// TODO
@@ -98,6 +118,7 @@ public abstract class Charater : MonoBehaviour
         hitbox.StateUpdate();
         itemController.StateUpdate();
         property.StateUpdate();
+        // Debug.Log($"skill:{skillEnum} hasFrag3:{skillEnum.HasFlag(SkillEnum.skill3)}");
 
         if (skill1CooldownTimer > 0) { skill1CooldownTimer -= Time.deltaTime; }
         if (skill2CooldownTimer > 0) { skill2CooldownTimer -= Time.deltaTime; }

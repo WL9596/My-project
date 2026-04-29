@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RrroseRifleBullet : Bullet
 {
-
+    public Charater attackCharater;
     public override DamageInfo BuildDamageInfo()
     {
         DamageInfo damageInfo = new DamageInfo();
@@ -18,12 +18,8 @@ public class RrroseRifleBullet : Bullet
             {
                 value.ReceiveDamageInfo(BuildDamageInfo());
             }
-            
+            attackCharater.OnBulletHit(transform.position);
             Destroy(gameObject);
         }
-    }
-    void OnCllisionEnter2D(Collision2D collision)
-    {
-        
     }
 }
