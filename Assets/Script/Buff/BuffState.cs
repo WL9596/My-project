@@ -7,18 +7,19 @@ public abstract class BuffState
 {
     protected HashSet<PropertyEnum> propertyEnums;
     public HashSet<PropertyEnum> PropertyEnums => propertyEnums;
-    protected int timer;//if timer == -1 , which mean this buff wont disappear
+    [SerializeField] protected float timer;//if timer == -1 , which mean this buff wont disappea
+    public float Timer => timer;
     
     public virtual void StateUpdate()
     {
         if (timer != -1 && timer > 0)
         {
-            timer--;
+            timer-=Time.deltaTime;
         }
     }
     public virtual bool IsDeleteBuff()
     {
-        return timer == 0;
+        return timer <= 0 && timer!=-1;
     }
     public void RemoveState()
     {

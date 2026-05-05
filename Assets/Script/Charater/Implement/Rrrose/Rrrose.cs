@@ -26,6 +26,13 @@ public class Rrrose : Charater
     [SerializeField] float healCircleContinueTime = 5;
     [SerializeField] int gainBlueHealth = 100;
 
+    [Header("Ultimate Skill")]
+    [SerializeField] int waveCount = 4;
+    [SerializeField] float waveTriggerTime = 1;
+    [SerializeField] float waveWidth = 1;
+    [SerializeField] float waveFrozenTime = 3;
+    [SerializeField] GameObject rrroseWaveModel;
+
     public override void UseSkill1()
     {
         if (!IsAbleUseSkill1()) { return; }
@@ -60,11 +67,15 @@ public class Rrrose : Charater
         }
         if(stateInfo.IsName(HookState.pull.ToString()))
         {
-            TranslatePosition(-(hookCollider.transform.position-lastHookTopPosition));
-            lastHookTopPosition = hookCollider.transform.position;
-            if(stateInfo.normalizedTime >= 1.0f)
+
+            if (stateInfo.normalizedTime >= 0.9f)
             {
                 BreakSkill1();
+            }
+            else
+            {
+                TranslatePosition(-(hookCollider.transform.position-lastHookTopPosition));
+                lastHookTopPosition = hookCollider.transform.position;
             }
         }
         if(stateInfo.IsName(HookState.hit.ToString()))
@@ -123,11 +134,13 @@ public class Rrrose : Charater
     }
     protected override void BreakSkill3()
     {
+        if (!skillEnum.HasFlag(SkillEnum.skill3)) { return; }
         Destroy(healthCircle?.gameObject);
         frozenBuff.RemoveState();
         frozenBuff = null;
         skillEnum = skillEnum &~ SkillEnum.skill3;
         property.ClearBlueHealth();
+        skill3CooldownTimer = skill3Cooldown;
     }
     protected override bool IsAbleUseSkill3()
     {
@@ -141,21 +154,53 @@ public class Rrrose : Charater
         }
         if(healthCircleTimer<=0)
         {
-            BreakSkill2();
+            BreakSkill3();
         }
     }
 
     public override void UseUltimateSkill()
     {
-        throw new System.NotImplementedException();
+        if (!IsAbleUseUltimateSkill()) { return; }
+        skillEnum = skillEnum | SkillEnum.ultimateSkill;
+        ultimateSkillCooldownTimer = ultimateSkillCooldown;
+        frozenBuff = new FrozenBuff();
+        property.AddBuffState(frozenBuff);
+        animationController.Animator.SetTrigger("ultimateMove");
     }
     protected override void UltimateSkillStateUpdate()
     {
-        throw new System.NotImplementedException();
+        AnimatorStateInfo stateInfo = animationController.Animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("ultimateMove") && stateInfo.normalizedTime >= 1.0f)
+        {
+            SummonUltimateAttackArea();
+            animationController.Animator.SetTrigger("rrroseMove");
+            BreakUltimateSkill();
+        }
+    }
+    void SummonUltimateAttackArea()
+    {
+        for(int i=0;i<waveCount;i++)
+        {
+            RrroseWave wave = Instantiate(rrroseWaveModel).GetComponent<RrroseWave>();
+            wave.transform.rotation = transform.rotation;
+            wave.transform.position = transform.position + (Vector3)FacingVector2() * (i + 0.5f) * waveWidth;
+            wave.transform.localScale = new Vector3(waveWidth, wave.transform.localScale.y, wave.transform.localScale.z);
+            wave.attackCharater = this;
+            wave.frozenTime = waveFrozenTime;
+            wave.SetTimer(i * waveTriggerTime, waveTriggerTime);
+        }
     }
     protected override bool IsAbleUseUltimateSkill()
     {
-        return base.IsAbleUseUltimateSkill() &&!skillEnum.HasFlag(SkillEnum.skill1);
+        return base.IsAbleUseUltimateSkill() && !skillEnum.HasFlag(SkillEnum.skill1);
+    }
+    protected override void BreakUltimateSkill()
+    {
+        if (!skillEnum.HasFlag(SkillEnum.ultimateSkill)) { return; }
+        frozenBuff.RemoveState();
+        frozenBuff = null;
+        skillEnum = skillEnum &~ SkillEnum.ultimateSkill;
+        ultimateSkillCooldownTimer = ultimateSkillCooldown;
     }
     public override void OnBulletHit(Vector3 hitPosition)
     {

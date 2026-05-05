@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RrroseRifleBullet : Bullet
 {
-    public Charater attackCharater;
+    public Charater attackCharater;//
     public override DamageInfo BuildDamageInfo()
     {
         DamageInfo damageInfo = new DamageInfo();
@@ -11,15 +11,20 @@ public class RrroseRifleBullet : Bullet
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject != attacker && (collision.gameObject.layer == LayerMask.NameToLayer("Build")||collision.gameObject.layer == LayerMask.NameToLayer("Charater")))
+        if (collision.gameObject != attacker 
+        && (collision.gameObject.layer == LayerMask.NameToLayer("Build")||collision.gameObject.layer == LayerMask.NameToLayer("Charater")))
         {
             // Debug.Log($"collision:{collision.gameObject} attacker:{attacker} bool:{collision.gameObject == attacker}");
             if(collision.TryGetComponent<IHitbox>(out var value))
             {
                 value.ReceiveDamageInfo(BuildDamageInfo());
             }
-            attackCharater.OnBulletHit(transform.position);
+            
             Destroy(gameObject);
         }
+    }
+    void OnCllisionEnter2D(Collision2D collision)
+    {
+        
     }
 }

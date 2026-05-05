@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346058797875486699}
   - component: {fileID: 7252753305239375694}
-  - component: {fileID: 4423185687950226610}
+  - component: {fileID: 2798274991590534468}
   m_Layer: 10
   m_Name: charaterAnimation
   m_TagString: Untagged
@@ -232,23 +232,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4ab3f0b9013fc4dba93dd640977239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharaterAnimationController
---- !u!111 &4423185687950226610
-Animation:
+  animator: {fileID: 2798274991590534468}
+--- !u!95 &2798274991590534468
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2620214929740108316}
   m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: d877d6ec0ff2a614dbd6d6c0a9883372, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: d877d6ec0ff2a614dbd6d6c0a9883372, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 86d0d89aeb4ee034d991733c573e218a, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_CullingType: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4670093217092885865
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharaterState
   charaterTransform: {fileID: 4852010183060104519}
   health: 0
+  maxHealth: 0
+  blueHealth: 0
   maxRegenerationReadyTime: 0
   regenerationReadyTimer: 0
   originalSpeed: 5
@@ -431,6 +439,12 @@ MonoBehaviour:
   healthCircle: {fileID: 0}
   healthCircleTimer: 0
   healCircleContinueTime: 5
+  gainBlueHealth: 100
+  waveCount: 4
+  waveTriggerTime: 1
+  waveWidth: 1
+  waveFrozenTime: 3
+  rrroseWaveModel: {fileID: 3193407893620003717, guid: d40c15e31b9cfaa46a2d0ac9cea4b2e2, type: 3}
 --- !u!1 &5137805105919379392
 GameObject:
   m_ObjectHideFlags: 0

@@ -53,8 +53,13 @@ public abstract class Charater : MonoBehaviour
     }
     public virtual void Facing(float rotation)
     {
-        if(!property.CurrentIsEnableRotation){return;}
-        property.CharaterTransform.rotation = Quaternion.Euler(new Vector3(0,0,rotation));
+        if (!property.CurrentIsEnableRotation) { return; }
+        property.CharaterTransform.rotation = Quaternion.Euler(new Vector3(0, 0, rotation));
+    }
+    protected Vector2 FacingVector2()
+    {
+        double angle = property.CharaterTransform.rotation.eulerAngles.z/180*Math.PI;
+        return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)); 
     }
     public virtual void ClickUseItem()
     {
@@ -82,7 +87,12 @@ public abstract class Charater : MonoBehaviour
     protected abstract void UltimateSkillStateUpdate();
     public void ReceiveDamageInfo(DamageInfo damageInfo)
     {
-        //BUFF處裡的位置
+        foreach(DamageBuffInfo damageBuffInfo in damageInfo.buffInfoList)
+        {
+            BuffState buffState = damageBuffInfo.BuildBuffState();
+            AddBuffState(buffState);
+        }
+
         if(damageInfo.damage>=0)
         {
             property.ReceiveDamage(damageInfo.damage);

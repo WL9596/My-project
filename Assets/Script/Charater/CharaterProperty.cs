@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class CharaterProperty : MonoBehaviour, ICharaterComponent
@@ -39,7 +40,11 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     /// 代增加:增傷倍率、治療倍率
     /// </summary>
 
-    
+    [ContextMenu("Print all buff")]
+    void DEBUG_buffList()
+    {
+        Debug.Log($"{allBuffList.PrintAllBuff()}");
+    }
     public void GetBlueHealth(int value)
     {
         blueHealth += value;
