@@ -1,15 +1,29 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using System.Text;
+using Unity.VisualScripting;
 
+[Serializable]
 public class BuffList
 {
-    PropertyEnum property = PropertyEnum.none;
-    public BuffList(){}
+    [SerializeField] PropertyEnum property = PropertyEnum.none;
+    public BuffList() { }
     public BuffList(PropertyEnum propertyEnum)
     {
         property = propertyEnum;
     }
-    List<BuffState> buffList = new List<BuffState>();
+    [SerializeField] List<BuffState> buffList = new List<BuffState>();
+
+    public string PrintAllBuff()
+    {
+        StringBuilder stringBuilder = new StringBuilder("all buff:\n");
+        foreach (BuffState buffState in buffList)
+        {
+            stringBuilder.Append($"{buffState.GetType()} time:{buffState.Timer}");
+        }
+        return stringBuilder.ToString();
+    }
 
     public void AddBuffState(BuffState buffState)
     {
@@ -50,5 +64,12 @@ public class BuffList
         }
         return damageReductionRate;
     }
-
+    public bool GetIsEnableRotate(bool isEnableRotate)
+    {
+        foreach (BuffState buffState in buffList)
+        {
+            isEnableRotate = buffState.GetIsEnableRotate(isEnableRotate) ? isEnableRotate : false;
+        }
+        return isEnableRotate;
+    }
 }

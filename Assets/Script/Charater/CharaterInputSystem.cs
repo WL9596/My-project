@@ -3,8 +3,11 @@ using UnityEngine;
 public class CharaterInputSystem : MonoBehaviour
 {
     [SerializeField] Charater charater;
+    [SerializeField] bool isControlled;
+    
     void Update()
     {
+        if (!isControlled) { return; }
         MoveInput();
         FacingInput();
         ClickInput();
@@ -27,19 +30,19 @@ public class CharaterInputSystem : MonoBehaviour
         {
             charater.ContinueUseItem2();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if(Input.GetKeyDown(KeyCode.LeftShift))
         {
             charater.UseSkill1();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(Input.GetMouseButtonDown(1))
         {
             charater.UseSkill2();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             charater.UseSkill3();
         }
-        if(Input.GetKeyDown(KeyCode.Alpha4))
+        if(Input.GetKeyDown(KeyCode.LeftControl))
         {
             charater.UseUltimateSkill();
         }

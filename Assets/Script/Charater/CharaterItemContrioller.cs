@@ -10,7 +10,10 @@ public class CharaterItemContrioller : MonoBehaviour, ICharaterComponent
 
     public void StateUpdate()
     {
-
+        foreach(Item item in itemList)
+        {
+            item.StateUpdate();
+        }
     }
     public void UseItem()
     {
