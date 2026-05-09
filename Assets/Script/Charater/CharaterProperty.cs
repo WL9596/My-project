@@ -45,6 +45,12 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
     {
         Debug.Log($"{allBuffList.PrintAllBuff()}");
     }
+
+    public void ResetProperty()
+    {
+        health = maxHealth;
+        allBuffList.RemoveAllBuff();
+    }
     public void GetBlueHealth(int value)
     {
         blueHealth += value;
@@ -93,8 +99,8 @@ public class CharaterProperty : MonoBehaviour, ICharaterComponent
         buffState.ExecuteOnBuffAdded();
         allBuffList.AddBuffState(buffState);
     }
-    void Update()
+    void Start()
     {
-
+        health = maxHealth;
     }
 }

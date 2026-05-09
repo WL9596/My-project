@@ -267,9 +267,10 @@ GameObject:
   - component: {fileID: 6090697893002501308}
   - component: {fileID: 3458920082253029539}
   - component: {fileID: 8774595103788002297}
+  - component: {fileID: -5663273325218670795}
   - component: {fileID: 7310890053067110129}
   - component: {fileID: 7525177459119556176}
-  - component: {fileID: -5663273325218670795}
+  - component: {fileID: 2112098110405272930}
   m_Layer: 10
   m_Name: Rrrrose
   m_TagString: Untagged
@@ -322,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharaterState
   charaterTransform: {fileID: 4852010183060104519}
   health: 0
-  maxHealth: 0
+  maxHealth: 100
   blueHealth: 0
   maxRegenerationReadyTime: 0
   regenerationReadyTimer: 0
@@ -342,6 +343,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharaterHitBox
   charater: {fileID: -5663273325218670795}
+--- !u!114 &-5663273325218670795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4670093217092885865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b2204bf916ea04aa5f7910cb031c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Rrrose
+  animationController: {fileID: 7252753305239375694}
+  hitbox: {fileID: 8774595103788002297}
+  itemController: {fileID: 7849559922633916812}
+  property: {fileID: 3458920082253029539}
+  teamTag: 0
+  skillEnum: 0
+  skill1Cooldown: 3
+  skill1CooldownTimer: 0
+  skill2Cooldown: 3
+  skill2CooldownTimer: 0
+  skill3Cooldown: 3
+  skill3CooldownTimer: 0
+  ultimateSkillCooldown: 3
+  ultimateSkillCooldownTimer: 0
+  hookAnimator: {fileID: 7574788965177129358}
+  hookCollider: {fileID: 801786160233980715}
+  hookState: 0
+  hookedObj: {fileID: 0}
+  healthCircleModel: {fileID: 7330518574551305056, guid: ec10a8291d5830544a77cb9f5cc1786b, type: 3}
+  healthCircle: {fileID: 0}
+  healthCircleTimer: 0
+  healCircleContinueTime: 5
+  gainBlueHealth: 100
+  waveCount: 4
+  waveTriggerTime: 1
+  waveWidth: 1
+  waveFrozenTime: 3
+  rrroseWaveModel: {fileID: 3193407893620003717, guid: d40c15e31b9cfaa46a2d0ac9cea4b2e2, type: 3}
 --- !u!58 &7310890053067110129
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -405,7 +446,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-5663273325218670795
+--- !u!114 &2112098110405272930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -414,37 +455,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4670093217092885865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61b2204bf916ea04aa5f7910cb031c26, type: 3}
+  m_Script: {fileID: 11500000, guid: 8372b48a4b95f734ba17b757523d3310, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Rrrose
-  animationController: {fileID: 7252753305239375694}
-  hitbox: {fileID: 8774595103788002297}
-  itemController: {fileID: 7849559922633916812}
-  property: {fileID: 3458920082253029539}
-  teamTag: 0
-  skillEnum: 0
-  skill1Cooldown: 3
-  skill1CooldownTimer: 0
-  skill2Cooldown: 3
-  skill2CooldownTimer: 0
-  skill3Cooldown: 3
-  skill3CooldownTimer: 0
-  ultimateSkillCooldown: 3
-  ultimateSkillCooldownTimer: 0
-  hookAnimator: {fileID: 7574788965177129358}
-  hookCollider: {fileID: 801786160233980715}
-  hookState: 0
-  hookedObj: {fileID: 0}
-  healthCircleModel: {fileID: 7330518574551305056, guid: ec10a8291d5830544a77cb9f5cc1786b, type: 3}
-  healthCircle: {fileID: 0}
-  healthCircleTimer: 0
-  healCircleContinueTime: 5
-  gainBlueHealth: 100
-  waveCount: 4
-  waveTriggerTime: 1
-  waveWidth: 1
-  waveFrozenTime: 3
-  rrroseWaveModel: {fileID: 3193407893620003717, guid: d40c15e31b9cfaa46a2d0ac9cea4b2e2, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::CharaterRespawnController
+  charater: {fileID: -5663273325218670795}
 --- !u!1 &5137805105919379392
 GameObject:
   m_ObjectHideFlags: 0

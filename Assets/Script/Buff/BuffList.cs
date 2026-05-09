@@ -24,7 +24,14 @@ public class BuffList
         }
         return stringBuilder.ToString();
     }
-
+    public void RemoveAllBuff()
+    {
+        int amount = buffList.Count;
+        for (int i = amount - 1; i >= 0; i--)
+        {
+            buffList.RemoveAt(i);
+        }
+    }
     public void AddBuffState(BuffState buffState)
     {
         buffList.Add(buffState);

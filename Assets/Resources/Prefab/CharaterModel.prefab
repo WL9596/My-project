@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4ab3f0b9013fc4dba93dd640977239, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharaterAnimationController
+  animator: {fileID: 0}
 --- !u!111 &4423185687950226610
 Animation:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ GameObject:
   - component: {fileID: 6090697893002501308}
   - component: {fileID: 3458920082253029539}
   - component: {fileID: 8774595103788002297}
+  - component: {fileID: 4590612454615493397}
   - component: {fileID: 7310890053067110129}
   - component: {fileID: 7525177459119556176}
   m_Layer: 10
@@ -212,6 +214,16 @@ MonoBehaviour:
   hitbox: {fileID: 8774595103788002297}
   itemController: {fileID: 7849559922633916812}
   property: {fileID: 3458920082253029539}
+  teamTag: 0
+  skillEnum: 0
+  skill1Cooldown: 0
+  skill1CooldownTimer: 0
+  skill2Cooldown: 0
+  skill2CooldownTimer: 0
+  skill3Cooldown: 0
+  skill3CooldownTimer: 0
+  ultimateSkillCooldown: 0
+  ultimateSkillCooldownTimer: 0
 --- !u!114 &6090697893002501308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,9 +252,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CharaterState
   charaterTransform: {fileID: 4852010183060104519}
   health: 0
+  maxHealth: 100
+  blueHealth: 0
   maxRegenerationReadyTime: 0
   regenerationReadyTimer: 0
   originalSpeed: 1
+  originalIsEnableRotation: 1
   damageReductionRate: 1
 --- !u!114 &8774595103788002297
 MonoBehaviour:
@@ -256,6 +271,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5601ccd477ce5524f9d3cf2988a415af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharaterHitBox
+  charater: {fileID: 6024468831556209268}
+--- !u!114 &4590612454615493397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4670093217092885865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8372b48a4b95f734ba17b757523d3310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharaterRespawnController
   charater: {fileID: 6024468831556209268}
 --- !u!58 &7310890053067110129
 CircleCollider2D:
@@ -364,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d9fbab793ffa6c4fb4fa1877dcba93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemTest
+  ownerCharater: {fileID: 0}
   isHolding: 0
 --- !u!1 &7677850565620676937
 GameObject:

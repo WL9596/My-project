@@ -9,6 +9,7 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected CharaterHitBox hitbox;
     [SerializeField] protected CharaterItemContrioller itemController;
     [SerializeField] protected CharaterProperty property;
+    public CharaterProperty Property => property;
 
     [Header("Team tag")]
     [SerializeField] protected int teamTag = 0;
@@ -25,6 +26,12 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected float ultimateSkillCooldown;
     [SerializeField] protected float ultimateSkillCooldownTimer;
     
+
+    public void Respawn(Vector3 spawnPosition)
+    {
+        property.CharaterTransform.position = spawnPosition;
+        property.ResetProperty();
+    }
     public void AddBuffState(BuffState buffState)
     {
         property.AddBuffState(buffState);
