@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4562624755216174240}
   - component: {fileID: 5053806272984848538}
   - component: {fileID: 5177039482971748356}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: carPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,9 +81,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1401810751
+  m_SortingLayer: 2
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.3814302, g: 0.8980392, b: 0.32549024, a: 1}
@@ -202,7 +202,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028837916345040373, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1401810751
       objectReference: {fileID: 0}
     - target: {fileID: 7928880164864687351, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Name
@@ -210,7 +222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7928880164864687351, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -283,7 +295,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6028837916345040373, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7357106408016771260, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1401810751
       objectReference: {fileID: 0}
     - target: {fileID: 7928880164864687351, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Name
@@ -291,7 +315,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7928880164864687351, guid: 680981728b466464ebb3625f1aab7b68, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -17,14 +17,11 @@ public class RrroseRifleBullet : Bullet
             // Debug.Log($"collision:{collision.gameObject} attacker:{attacker} bool:{collision.gameObject == attacker}");
             if(collision.TryGetComponent<IHitbox>(out var value))
             {
+                
                 value.ReceiveDamageInfo(BuildDamageInfo());
             }
-            
+            Debug.Log(collision.gameObject);
             Destroy(gameObject);
         }
-    }
-    void OnCllisionEnter2D(Collision2D collision)
-    {
-        
     }
 }

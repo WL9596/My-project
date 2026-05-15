@@ -9,6 +9,7 @@ public abstract class Charater : MonoBehaviour
     [SerializeField] protected CharaterHitBox hitbox;
     [SerializeField] protected CharaterItemContrioller itemController;
     [SerializeField] protected CharaterProperty property;
+    [SerializeField] protected CharaterBuildingInteract buildingInteract;
     public CharaterProperty Property => property;
 
     [Header("Team tag")]
@@ -65,8 +66,12 @@ public abstract class Charater : MonoBehaviour
     }
     protected Vector2 FacingVector2()
     {
-        double angle = property.CharaterTransform.rotation.eulerAngles.z/180*Math.PI;
-        return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)); 
+        double angle = property.CharaterTransform.rotation.eulerAngles.z / 180 * Math.PI;
+        return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+    }
+    public void BuildingInteract()
+    {
+        buildingInteract.TryInteract();
     }
     public virtual void ClickUseItem()
     {

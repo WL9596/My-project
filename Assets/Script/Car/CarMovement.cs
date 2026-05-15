@@ -45,7 +45,7 @@ public class CarMovement : MonoBehaviour
         {
 
             int direct = Vector3.Angle(targetFacing, facing) > 180 ? 1 : -1;
-            Debug.Log($"rota:{direct*angularVelocity * Time.deltaTime} ang{Vector3.Angle(targetFacing,facing)}");
+            // Debug.Log($"rota:{direct*angularVelocity * Time.deltaTime} ang{Vector3.Angle(targetFacing,facing)}");
             transform.Rotate(0, 0, angularVelocity * Time.deltaTime*direct);
         }
         else

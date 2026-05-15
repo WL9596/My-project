@@ -42,9 +42,13 @@ public class CharaterInputSystem : MonoBehaviour
         {
             charater.UseSkill3();
         }
-        if(Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             charater.UseUltimateSkill();
+        }
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            charater.BuildingInteract();
         }
     }
     void MoveInput()
